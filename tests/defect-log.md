@@ -193,3 +193,56 @@
 * May also affect gamification logic (e.g., leaderboard, badges).
 
 ---
+### 🐛 **DEF-010: Leaderboard Not Available**
+
+* **Page**: `/dashboard`
+* **Issue**: No **Leaderboard** section visible or functioning
+* **Steps to Reproduce**:
+
+  1. Submit one or more pickup requests
+  2. Navigate to **Dashboard**
+* **Expected**:
+
+  * A **Leaderboard** section showing ranked users and points
+* **Actual**:
+
+  * No such section exists
+* **Severity**: Major (Breaks gamification and user motivation)
+
+---
+
+### 🐛 **DEF-011: Pickup History Not Displayed on Dashboard**
+
+* **Page**: `/dashboard`
+* **Issue**: Recent or past pickups are not listed
+* **Steps to Reproduce**:
+
+  1. Complete a pickup request
+  2. Navigate to the **Dashboard**
+* **Expected**:
+
+  * A table/list showing previous pickups
+* **Actual**:
+
+  * Only counters are shown, and they remain at 0
+* **Severity**: Major
+
+---
+
+### 🐛 **DEF-012: No Badge Awarded for First Pickup**
+
+* **Page**: `/profile` or `/dashboard` (wherever badges should appear)
+* **Issue**: No badge (e.g., “First Pickup”) is awarded or shown
+* **Steps to Reproduce**:
+
+  1. Submit a pickup
+  2. Check profile or dashboard
+* **Expected**:
+
+  * A badge displayed with name and icon
+* **Actual**:
+
+  * No visual badge or notification
+* **Severity**: Minor (Gamification issue)
+
+---

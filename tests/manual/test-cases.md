@@ -184,6 +184,3 @@
 | Admin Panel Layout     | ✅        | ❌ Sidebar broken | ✅ | ✅  |
 
 ---
-
-
-

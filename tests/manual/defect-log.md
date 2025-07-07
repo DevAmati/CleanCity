@@ -246,3 +246,142 @@
 * **Severity**: Minor (Gamification issue)
 
 ---
+### 🧪 DEF-013: Unit Test – Allows Scheduling Pickup for Today or Past Dates
+
+**Test File**: `tests/unit/jest/allUnitTests.test.js`
+**Test Name**: `should reject pickup requests with past or today's date`
+**Category**: Automated Unit Test Bug
+**Status**: 🛑 Failing (Bug confirmed)
+
+#### 🔁 Steps in Test Logic:
+
+```js
+test('should reject pickup requests with past or today\'s date', () => {
+  const today = new Date().toISOString().split('T')[0]; // e.g., "2025-07-07"
+  const pastDate = '2024-12-31';
+
+  const invalidTodayPickup = dataService.addPickupRequest({
+    id: 'REQ_TODAY',
+    date: today,
+    wasteType: 'Plastic',
+    quantity: 5,
+    location: 'Nairobi',
+    userId: 'USR001'
+  });
+
+  const invalidPastPickup = dataService.addPickupRequest({
+    id: 'REQ_PAST',
+    date: pastDate,
+    wasteType: 'Glass',
+    quantity: 3,
+    location: 'Nairobi',
+    userId: 'USR001'
+  });
+
+  expect(invalidTodayPickup).toBe(false);  // ❌ Currently returns true
+  expect(invalidPastPickup).toBe(false);   // ❌ Currently returns true
+});
+```
+
+#### 🧪 Expected:
+
+* `.addPickupRequest()` should return `false` for today's or past dates.
+
+#### ❌ Actual:
+
+* The method **accepts invalid dates**, indicating **missing validation logic** in `addPickupRequest()`.
+
+#### 🔧 Suggested Fix:
+
+Add a validation inside `addPickupRequest()` in `script.js`:
+
+```js
+const today = new Date().toISOString().split('T')[0];
+if (pickup.date <= today) {
+  return false; // Reject invalid pickup dates
+}
+```
+
+---
+### 🐛 DEF-014: `localStorage` Not Available During Automated Testing (Jest)
+
+* **Category**: Integration Testing / Environment Configuration
+* **File Affected**: `script.js`, `DashboardDataFlow.test.js`
+* **Test File**: `tests/integration/jest/DashboardDataFlow.test.js`
+* **Environment**: Node.js (Jest default test runner)
+* **Date Logged**: July 7, 2025
+* **Reported By**: Josephat Musyoka
+
+---
+
+#### 🧪 **Issue Description**:
+
+The application code (specifically `script.js`) depends on `localStorage`, which is **not available** in the default Node.js test environment used by Jest. As a result, running integration tests throws the following error:
+
+```
+ReferenceError: localStorage is not defined
+```
+
+This happens immediately when importing `script.js`, where the following line is called:
+
+```js
+if (!localStorage.getItem(STORAGE_KEYS.PICKUP_REQUESTS)) {
+```
+
+---
+
+#### 🔁 **Steps to Reproduce**:
+
+1. Ensure `script.js` is imported in any Jest test (e.g., integration or user unit test).
+2. Run the following command:
+
+```bash
+npx jest tests/integration/jest/DashboardDataFlow.test.js
+```
+
+---
+
+#### ❌ **Actual Result**:
+
+Tests fail with `ReferenceError: localStorage is not defined`.
+
+---
+
+#### ✅ **Expected Result**:
+
+The tests should simulate a DOM-like environment with a mock or virtual `localStorage` so the app logic executes without crashing.
+
+---
+
+#### 🔧 **Suggested Fix**:
+
+1. Install `jest-localstorage-mock`:
+
+   ```bash
+   npm install --save-dev jest-localstorage-mock
+   ```
+
+2. Update Jest config:
+
+   * In `package.json`:
+
+     ```json
+     "jest": {
+       "setupFiles": ["jest-localstorage-mock"]
+     }
+     ```
+   * Or in `jest.config.js`:
+
+     ```js
+     module.exports = {
+       setupFiles: ['jest-localstorage-mock']
+     };
+     ```
+
+---
+
+#### 📊 **Severity**: **Critical**
+
+**Impact**: Blocks all unit and integration tests that depend on `script.js` or any logic involving `localStorage`. Prevents automation of core data flow testing.
+
+---

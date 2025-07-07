@@ -32,7 +32,7 @@ This QA plan applies to the following core modules of the CleanCity Web Applicat
 | **Network Conditions**  | 3G, 4G, Wi-Fi (throttled via DevTools)                  |
 | **Accessibility Tools** | axe DevTools, Lighthouse, NVDA screen reader            |
 | **QA Tools**            | GitHub Kanban, Git, GitLens, Markdown docs              |
-| **Execution Tools**     | React Testing Library (for automation - optional bonus) |
+| **Execution Tools**     | React Testing Library, Jest, Pytest, Selenium, Unittest |
 
 ---
 
@@ -45,18 +45,18 @@ This QA plan applies to the following core modules of the CleanCity Web Applicat
 
 #### 📦 Data Sets:
 
-* **Valid Samples:**
+**Valid Samples:**
 
-  * Names: “Test User”, “Josephat Musyoka”
-  * Locations: “Nairobi”, “Kirinyaga”
-  * Dates: “July 5, 2025”, “2025-07-06”
+* Names: “Test User”, “Josephat Musyoka”
+* Locations: “Nairobi”, “Kirinyaga”
+* Dates: “July 5, 2025”, “2025-07-06”
 
-* **Invalid Samples:**
+**Invalid Samples:**
 
-  * Empty strings (`""`)
-  * Nonsense input: `!!@@`, `1234567890@#`
-  * Extremely long strings (255+ chars)
-  * Emojis or unsupported Unicode: 😎💥
+* Empty strings (`""`)
+* Nonsense input: `!!@@`, `1234567890@#`
+* Extremely long strings (255+ chars)
+* Emojis or unsupported Unicode: 😎💥
 
 #### ⚠️ Edge Cases:
 
@@ -102,28 +102,76 @@ This QA plan applies to the following core modules of the CleanCity Web Applicat
 
 ---
 
-### 5️⃣ Jira / Kanban Setup
+### 5️⃣ 📊 Jira & GitHub Kanban Setup
 
-#### 📌 GitHub Projects (Free Kanban Alternative)
+#### 🧑‍🤝‍🧑 Team Members
 
-* **Columns:**
+| Name               | Email Address                                                       | Role        |
+| ------------------ | ------------------------------------------------------------------- | ----------- |
+| Morgan Amati       | [morganamati122@gmail.com](mailto:morganamati122@gmail.com)         | Team Leader |
+| Josephat Musyoka   | [josephatmusyoka138@gmail.com](mailto:josephatmusyoka138@gmail.com) | QA Tester   |
+| Elizabeth Magaduka | [elizahbeth33@gmail.com](mailto:elizahbeth33@gmail.com)             | QA Tester   |
 
-  * `To Do` → `In Progress` → `Review` → `Done`
+---
 
-* **Cards:**
+#### 🛠️ Tool Strategy
 
-  * Create cards for each: feature, test area, bug, or task
-  * Assign cards to **Josephat**, **Morgan**, or **Elizabeth**
+The **Bug Hunters** team will use:
 
-* **Labels:**
+* 🐞 **Jira** for issue tracking, bug reporting, and test coverage
+* ✅ **GitHub Kanban Projects** for task assignment and progress visibility
 
-  * Use tags like:
+---
 
-    * `ui`, `form-validation`, `security`, `dashboard`, `mobile`, `accessibility`
+#### 📋 GitHub Kanban Setup
 
-* ✅ Update card status daily for visibility
+| Element          | Details                                                                                            |
+| ---------------- | -------------------------------------------------------------------------------------------------- |
+| **Project Name** | CleanCity QA Kanban – Bug Hunters                                                                  |
+| **Columns**      | `To Do` → `In Progress` → `Review` → `Done`                                                        |
+| **Cards**        | Each card = 1 test case, bug, automation task, or issue                                            |
+| **Labels**       | `ui`, `form-validation`, `security`, `dashboard`, `mobile`, `accessibility`, `manual`, `automated` |
+| **Status**       | Cards updated daily, linked to Jira issues where needed                                            |
 
-* 📎 Link cards to related Epics or Stories
+---
+
+#### 🐛 Jira Setup
+
+| Feature         | Setup Description                                                                    |
+| --------------- | ------------------------------------------------------------------------------------ |
+| **Issue Types** | Epic, Story, Task, Bug                                                               |
+| **Workflow**    | `To Do` → `In Progress` → `In Review` → `Done`                                       |
+| **Labeling**    | `authentication`, `dashboard`, `usability`, `performance`, `critical`, `minor`, etc. |
+| **Bug Format**  | Standard Markdown format + screenshot & metadata                                     |
+| **Integration** | Optionally link GitHub commits/branches to Jira issues                               |
+
+---
+
+#### ✏️ Sample Jira Bug Template
+
+```markdown
+**Title:** Incorrect pickup filter on Dashboard
+
+**Environment:**  
+- Browser: Chrome 125  
+- OS: Windows 10  
+- Device: Desktop  
+
+**Steps to Reproduce:**  
+1. Log in as a user  
+2. Navigate to Dashboard  
+3. Select filter “Kilimani”  
+4. Observe displayed results  
+
+**Expected Result:**  
+Only requests from Kilimani should be shown
+
+**Actual Result:**  
+Results from other locations appear
+
+**Severity:** Major  
+**Attachments:** dashboard-bug-kilimani.png
+```
 
 ---
 
@@ -135,14 +183,5 @@ This QA plan applies to the following core modules of the CleanCity Web Applicat
 | **Devices**                  | Windows 10 laptop, Android phone, iPad simulator/emulator              |
 | **Network Simulation**       | Chrome DevTools → Network → Throttling (3G, 4G)                        |
 | **Accessibility Validation** | axe DevTools, NVDA screen reader, Tab-key navigation, contrast checker |
-
----
-
-### 🧠 Notes
-
-* Automation is **optional but earns bonus** (up to +10%)
-* Focus on **cross-browser compatibility**, **mobile behavior**, and **form validation**
-* Prioritize **critical and major** bugs during execution
-* Use this test plan to align your `test-cases.md` and Jira board structure
 
 ---

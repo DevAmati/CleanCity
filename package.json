@@ -3,6 +3,17 @@
   "version": "1.0.0",
   "description": "A realistic testable web app for QA students - Waste Pickup Scheduler",
   "private": true,
+  "main": "index.js",
+  "homepage": ".",
+  "author": "Mutua Josephat Musyoka",
+  "license": "ISC",
+  "keywords": [],
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "jest",
+    "eject": "react-scripts eject"
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
@@ -13,11 +24,13 @@
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+  "devDependencies": {
+    "jest": "^27.5.1"
+  },
+  "jest": {
+    "roots": [
+      "<rootDir>/tests"
+    ]
   },
   "eslintConfig": {
     "extends": [
@@ -37,5 +50,8 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "."
-} 
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  }
+}

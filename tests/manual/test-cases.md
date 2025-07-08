@@ -184,3 +184,15 @@
 | Admin Panel Layout     | ✅        | ❌ Sidebar broken | ✅ | ✅  |
 
 ---
+### 📊 Test Case Summary
+
+| Category           | Total | Pass | Fail | Blocked |
+|--------------------|-------|------|------|---------|
+| Authentication     | 4     | 3    | 1    | 0       |
+| Waste Pickup       | 3     | 3    | 0    | 0       |
+| Dashboard          | 3     | 3    | 0    | 0       |
+| Feedback & Awareness | 3   | 2    | 1    | 0       |
+| Admin Panel        | 3     | 3    | 0    | 0       |
+| Non-Functional     | 3     | 2    | 1    | 0       |
+| Accessibility      | 3     | 3    | 0    | 0       |
+| **Total**          | 22    | 19   | 2    | 1       |

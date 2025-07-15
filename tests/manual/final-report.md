@@ -1,62 +1,78 @@
 # 🧾 Final QA Report
+---
 
 **File:** `tests/manual/final-report.md`
 **Project:** CleanCity – Waste Pickup Scheduler
 **Phase:** QA Phase 1 & 2
 **Team:** Bug Hunters
-**Date:** July 8, 2025
+**Date:** July 15, 2025
 **Prepared By:** Josephat Musyoka
 
 ---
 
 ## 🟢 Summary
 
-The **CleanCity** application underwent extensive **manual**, **automated**, and **non-functional testing** across core modules including Waste Pickup, Dashboard, Admin Panel, and Feedback system. This report summarizes the **test coverage**, **findings**, and **recommendations** based on the QA team’s efforts during Phase 1 and Phase 2.
+The **CleanCity** web application was tested across core modules including **Authentication, Dashboard, Scheduler, Admin Access**, and **Gamification**. Testing included **manual**, **unit**, **integration**, and **UI/UX assessments**.
 
 ---
 
 ## ✅ Test Coverage Overview
 
-| Test Area           | Tools Used                    | Test Artifacts                        | Status                |
-| ------------------- | ----------------------------- | ------------------------------------- | --------------------- |
-| Functional Tests    | Jest, Unittest, Selenium      | `test-cases.md`, `acceptance_test.py` | ✅ Passed              |
-| Accessibility       | axe DevTools, NVDA            | `axe-scan-report.md`                  | ⚠️ Issues found       |
-| Performance         | Lighthouse                    | `lighthouse-summary.md`               | ⚠️ Needs optimization |
-| Manual Testing      | Browser-based + Markdown Docs | `defect-log.md`, `test-plan.md`       | ✅ Completed           |
-| Cross-Browser       | Chrome, Firefox, Safari, Edge | Manual Observations                   | ⚠️ Safari modal bug   |
-| System Testing      | Selenium                      | `test_pickup_flow.py`                 | ✅ Covered             |
-| Integration Testing | React Testing Library         | `DashboardDataFlow.test.js`           | ✅ Covered             |
-| Unit Testing        | Jest                          | `user.test.js`, `dataService.test.js` | ✅ Passed              |
+| Test Area           | Tools Used                    | Artifacts                        | Status                              |
+| ------------------- | ----------------------------- | -------------------------------- | ----------------------------------- |
+| Functional Testing  | Jest, Manual                  | `test-cases.md`, `defect-log.md` | ✅ Complete                          |
+| Unit Testing        | Jest                          | `allUnitTests.test.js`           | ✅ Complete                          |
+| Integration Testing | Jest + DOM Mocks              | `DashboardDataFlow.test.js`      | ✅ Complete                          |
+| Manual Testing      | Chrome DevTools, Markdown     | `test-plan.md`, `defect-log.md`  | ✅ Complete                          |
+| Accessibility       | Manual Observation            | `accessibility-check.md`         | ⚠️ Issues Found                     |
+| Performance         | Lighthouse                    | `lighthouse-report.md`           | ⚠️ Optimization Needed              |
+| UI Responsiveness   | Manual (Chrome, Firefox)      | Screenshots                      | ✅ Confirmed (except mobile nav bug) |
+| Cross-Browser       | Chrome, Firefox, Safari, Edge | Manual                           | ⚠️ Safari layout issues             |
+| Security Validation | Manual (e.g., XSS input)      | In defect log                    | ✅ Covered                           |
+| Keyboard Navigation | Manual (Tab, Shift+Tab)       | Observation                      | ✅ Working                           |
 
 ---
 
-## 🐞 Defect Summary (from `defect-log.md`)
+## 🐞 Defect Summary
 
-| ID      | Module        | Description                         | Severity | Status          |
-| ------- | ------------- | ----------------------------------- | -------- | --------------- |
-| DEF-001 | Register      | No success message after signup     | Minor    | ✅ Fixed         |
-| DEF-007 | Dashboard     | Region filter returns wrong results | Major    | ⚠️ Open         |
-| DEF-009 | Feedback      | Empty input not blocked             | Major    | ✅ Fixed         |
-| DEF-013 | Awareness     | Eco tips not rotating               | Minor    | ✅ Fixed         |
-| DEF-015 | Accessibility | Missing alt text on images          | WCAG A   | ⚠️ Needs Fixing |
-| DEF-016 | Performance   | First load time over 5s on 3G       | Medium   | ⚠️ Improve      |
+| ID      | Module         | Description                        | Severity | Status  |
+| ------- | -------------- | ---------------------------------- | -------- | ------- |
+| DEF-001 | Auth           | No success message on registration | Minor    | ❌ Open  |
+| DEF-002 | Auth           | No confirm password field          | Major    | ❌ Open  |
+| DEF-003 | Auth           | Weak passwords allowed             | Major    | ❌ Open  |
+| DEF-004 | Auth           | Random login accepted              | Critical | ❌ Open  |
+| DEF-005 | Auth           | Emoji passwords accepted           | Major    | ❌ Open  |
+| DEF-006 | Access Control | Users access admin panel           | Critical | ❌ Open  |
+| DEF-007 | Scheduler      | No visual pickup confirmation      | Medium   | ❌ Open  |
+| DEF-008 | Scheduler      | Past/today dates allowed           | Major    | ❌ Open  |
+| DEF-009 | Dashboard      | Pickup count doesn’t update        | Major    | ❌ Open  |
+| DEF-010 | Gamification   | Leaderboard missing                | Major    | ❌ Open  |
+| DEF-011 | History        | No pickup history shown            | Major    | ❌ Open  |
+| DEF-012 | Badging        | First pickup badge not awarded     | Minor    | ❌ Open  |
+| DEF-013 | Unit Testing   | Date logic flaw in tests           | Major    | ❌ Open  |
+| DEF-014 | Integration    | `localStorage` undefined in Jest   | Critical | ✅ Fixed |
+| DEF-015 | Security (XSS) | Script injection succeeds          | Major    | ❌ Open  |
+| DEF-016 | Responsiveness | Mobile navbar blocks screen        | Medium   | ❌ Open  |
 
 ---
 
 ## 🧪 Key Findings
 
-### ✅ Strengths:
+### ✅ Strengths
 
-* Clean and **modular architecture** in React.
-* Most core functionality passed **unit and integration tests**.
-* Admin panel and dashboard views are **well structured and responsive**.
+* Modular and readable code structure
+* Smooth functional flow
+* Complete unit/integration test coverage
+* Keyboard navigation fully functional
 
-### ⚠️ Areas Needing Attention:
+### ⚠️ Issues Identified
 
-* **Accessibility**: Missing alt texts, labels not properly mapped for screen readers.
-* **Performance**: Lighthouse score underperforms on slow networks.
-* **Safari Compatibility**: Modal windows fail to open in Safari.
-* **Input Validation**: Some forms lack proper validation messages for edge cases.
+* **Security**: XSS vulnerability on all inputs
+* **Authentication**: Weak password policies and access control flaws
+* **Scheduling Logic**: Invalid date handling
+* **Gamification**: Missing leaderboard and badge systems
+* **Mobile UX**: Fullscreen nav not collapsing
+* **Accessibility**: Missing alt texts and ARIA labels
 
 ---
 
@@ -64,44 +80,40 @@ The **CleanCity** application underwent extensive **manual**, **automated**, and
 
 | Severity    | Count | Fixed | Open |
 | ----------- | ----- | ----- | ---- |
-| 🔴 Critical | 0     | 0     | 0    |
-| 🟠 Major    | 3     | 2     | 1    |
-| 🟡 Minor    | 2     | 2     | 0    |
-| 🔵 Cosmetic | 1     | 0     | 1    |
+| 🔴 Critical | 2     | 1     | 1    |
+| 🟠 Major    | 9     | 0     | 9    |
+| 🟡 Minor    | 3     | 0     | 3    |
+| 🔵 Medium   | 2     | 0     | 2    |
 
 ---
 
-## 📂 Executed Artifacts
+## 📂 QA Artifacts Executed
 
-* **Test Plan**: `test-plan.md`
-* **Test Cases**: `test-cases.md`
-* **Setup Notes**: `setup-notes.md`
-* **Defects**: `defect-log.md`
-* **Automated Tests**:
-
-  * Selenium: `acceptance_test.py`, `test_pickup_flow.py`
-  * Jest: `user.test.js`, `dataService.test.js`
-* **Reports**:
-
-  * Performance: `lighthouse-summary.md`
-  * Accessibility: `axe-scan-report.md`
+* `test-plan.md`
+* `test-cases.md`
+* `defect-log.md`
+* `allUnitTests.test.js`
+* `DashboardDataFlow.test.js`
+* `lighthouse-report.md`
+* `accessibility-check.md`
+* 📸 Screenshots for DEF-007, DEF-009, DEF-016 included
 
 ---
 
 ## 📌 Recommendations
 
-1. 🛠 Fix open bugs in **Dashboard filter** and **Safari modal**.
-2. 🌐 Improve **WCAG 2.1 compliance** (e.g., alt texts, label associations).
-3. 🚀 Optimize images and JS bundles to improve **load times** on 3G.
-4. 👥 Add tests for **guest user scenarios** and **error boundaries**.
-5. 🧪 Include **E2E CI integration** in GitHub Actions for future commits.
+1. **Fix access control & login bypass** (DEF-004, DEF-006)
+2. **Sanitize all user inputs** to prevent XSS (DEF-015)
+3. **Fix mobile navbar collapse bug** (DEF-016)
+4. **Implement gamification features** (DEF-010, DEF-012)
+5. **Enforce password strength and confirm field** (DEF-002, DEF-003, DEF-005)
+6. **Block past/today pickup dates in logic & UI** (DEF-008, DEF-013)
+7. **Improve accessibility for screen readers** via alt/ARIA updates
 
 ---
 
-## 🧾 Conclusion
+## ✅ UAT Readiness Status
 
-The Bug Hunters QA team concludes that **CleanCity** is functionally stable, with a strong foundation. Minor issues exist in **accessibility, performance**, and **cross-browser UI behavior**, but no **critical blockers** were found.
-
-> The app is **ready for UAT (User Acceptance Testing)** and deployment, after resolving the remaining major issues.
+The platform is stable and **ready for User Acceptance Testing (UAT)** with key issues logged. Final improvements should focus on **security**, **UX**, and **validation logic** before release.
 
 ---

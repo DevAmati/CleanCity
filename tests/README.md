@@ -18,7 +18,7 @@ We used [**Lighthouse**](https://github.com/GoogleChrome/lighthouse) to perform 
     * Eliminate render-blocking scripts
     * Enable text compression (GZIP)
 
-📄 Full Lighthouse audit: [`tests/performance/lighthouse-report.html`](tests/performance/lighthouse-report.html)
+📄 Full Lighthouse audit: [`tests/performance/lighthouse-report.html`](/performance/lighthouse-report.html)
 
 ---
 
@@ -41,6 +41,6 @@ Accessibility audits were conducted using [**axe-core**](https://github.com/dequ
 * Use `label` elements and associate them with inputs via `for`/`id`
 * Ensure dynamic elements are reachable by screen readers (via ARIA)
 
-📄 Full axe report: [`tests/accessibility/axe-scan-report.md`](tests/accessibility/axe-scan-report.md)
+📄 Full axe report: [`tests/accessibility/axe-scan-report.md`](/accessibility/axe-scan-report.md)
 
 ---
